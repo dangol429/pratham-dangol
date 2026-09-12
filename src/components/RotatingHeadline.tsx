@@ -22,7 +22,7 @@ const LONGEST_PHRASE = HERO_PHRASES.reduce((longest, phrase) =>
 const CYCLE_MS = 5000;
 
 const HEADLINE_TEXT_CLASSES =
-  "text-[clamp(2rem,6.5vw,3.75rem)] font-sans font-extrabold tracking-tight";
+  "text-[clamp(1.75rem,5vw,3rem)] font-sans font-extrabold tracking-tight";
 
 interface RotatingHeadlineProps {
   className?: string;

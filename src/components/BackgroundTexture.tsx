@@ -10,9 +10,11 @@ const GRAIN_DATA_URL = `data:image/svg+xml,${encodeURIComponent(GRAIN_SVG)}`;
 
 // Static CSS only — no canvas, no JS, no listeners. Costs nothing at
 // runtime beyond the two composited layers the browser already paints once.
+// Positioned absolute (not fixed) so it scopes to whatever container renders
+// it — currently just the hero — rather than covering the whole viewport.
 export function BackgroundTexture() {
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
       <div
         className="absolute inset-0 text-foreground"
         style={{

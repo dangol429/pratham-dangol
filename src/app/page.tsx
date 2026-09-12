@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { BackgroundTexture } from "@/components/BackgroundTexture";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { Hero } from "@/components/Hero";
 import { HowIBuild } from "@/components/HowIBuild";
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <BackgroundTexture />
       <Marquee items={TECH_STACK} />
       <SelectedWork />
       <HowIBuild />
