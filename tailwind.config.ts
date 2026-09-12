@@ -28,8 +28,8 @@ const config: Config = {
         content: "1100px",
       },
       spacing: {
-        "section-sm": "6.25rem",
-        "section-lg": "10rem",
+        "section-sm": "4rem",
+        "section-lg": "6rem",
       },
       keyframes: {
         marquee: {

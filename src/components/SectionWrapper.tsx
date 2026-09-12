@@ -6,9 +6,17 @@ interface SectionWrapperProps {
   className?: string;
 }
 
-export function SectionWrapper({ children, id, className = "" }: SectionWrapperProps) {
+export function SectionWrapper({
+  children,
+  id,
+  className = "",
+}: SectionWrapperProps) {
   return (
-    <section id={id} className={`py-section-sm md:py-section-lg ${className}`}>
+    <section
+      id={id}
+      style={{ background: "var(--color-background)" }}
+      className={`py-section-sm md:py-section-lg ${className}`}
+    >
       <div className="mx-auto max-w-content px-6">{children}</div>
     </section>
   );

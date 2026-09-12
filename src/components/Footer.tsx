@@ -12,8 +12,7 @@ export function Footer() {
           <div className="max-w-xs">
             <Logo />
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Frontend developer building fast, tested interfaces — remotely, from Birgunj,
-              Nepal.
+              Frontend developer building fast, tested interfaces — remotely.
             </p>
           </div>
 

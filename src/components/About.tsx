@@ -1,6 +1,5 @@
 import { EyebrowLabel } from "./EyebrowLabel";
 import { GhostHeading } from "./GhostHeading";
-import { PhotoFrame } from "./PhotoFrame";
 import { Reveal } from "./Reveal";
 import { SectionWrapper } from "./SectionWrapper";
 
@@ -14,15 +13,14 @@ interface TimelineItem {
 const TIMELINE: TimelineItem[] = [
   {
     role: "Frontend Developer",
-    company: "AlgoBulls · Remote",
+    company: "AlgoBulls · Remote, US",
     dates: "Jan 2025 — Present",
     description:
       "Work on Strategy Builder, RunScreen, Phoenix, and an internal SEO audit agent for an AI algorithmic trading platform.",
   },
   {
     role: "Intern → Frontend Developer",
-    // TODO(Pratham): confirm location for this period — assumed Remote to match the role above.
-    company: "AlgoBulls · Remote",
+    company: "AlgoBulls · Remote, US",
     dates: "Jan 2024 — Jan 2025",
   },
   {
@@ -46,10 +44,7 @@ export function About() {
 
       <Reveal className="mt-6 grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
-          {/* TODO(Pratham): swap in a real portrait */}
-          <PhotoFrame />
-
-          <div className="mt-8 space-y-6">
+          <div className="space-y-6">
             <div>
               <EyebrowLabel>Education</EyebrowLabel>
               <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -68,9 +63,8 @@ export function About() {
 
             <div>
               <EyebrowLabel>Languages</EyebrowLabel>
-              {/* TODO(Pratham): list the languages you want on your profile. */}
-              <p className="mt-2 text-sm italic leading-relaxed text-muted">
-                TODO — add languages (Pratham to confirm).
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                English, Nepali, Hindi
               </p>
             </div>
           </div>

@@ -6,7 +6,7 @@ import { RotatingHeadline } from "./RotatingHeadline";
 
 export function Hero() {
   return (
-    <div className="mx-auto max-w-content px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+    <div className="mx-auto max-w-content px-6 pt-16 pb-12 md:pt-24 md:pb-20">
       <Reveal className="grid items-stretch gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <EyebrowLabel>PRATHAM DANGOL · FRONTEND DEVELOPER</EyebrowLabel>
@@ -14,10 +14,9 @@ export function Hero() {
           <RotatingHeadline className="mt-6" />
 
           <p className="mt-8 max-w-lg text-base leading-relaxed text-muted">
-            I&apos;m a frontend developer based in Birgunj, Nepal, working
-            remotely with{" "}
+            I&apos;m a frontend developer working remotely with{" "}
             <strong className="font-semibold text-foreground">
-              2+ years building production React and TypeScript
+              3+ years building production React and TypeScript
             </strong>{" "}
             applications — from real-time features to{" "}
             <strong className="font-semibold text-foreground">
@@ -36,7 +35,7 @@ export function Hero() {
           </div>
 
           <p className="mt-6 font-mono text-xs uppercase tracking-widest text-muted">
-            Birgunj, Nepal · Remote · Open to roles &amp; contracts
+            Remote · Open to roles &amp; contracts
           </p>
         </div>
 
