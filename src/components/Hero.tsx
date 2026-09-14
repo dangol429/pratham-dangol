@@ -1,7 +1,7 @@
 import { BackgroundTexture } from "./BackgroundTexture";
 import { EyebrowLabel } from "./EyebrowLabel";
 import { LinkArrow } from "./LinkArrow";
-import { PhotoFrame } from "./PhotoFrame/PhotoFrame";
+import { PhotoFrame } from "./PhotoFrame";
 import { Pill } from "./Pill";
 import { Reveal } from "./Reveal";
 import { RotatingHeadline } from "./RotatingHeadline";

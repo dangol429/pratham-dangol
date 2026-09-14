@@ -1,7 +1,7 @@
 import { ALGOBULLS_LINKEDIN } from "@/data/site";
 import { EyebrowLabel } from "./EyebrowLabel";
 import { GhostHeading } from "./GhostHeading";
-import { PhotoFrame } from "./PhotoFrame/PhotoFrame";
+import { PhotoFrame } from "./PhotoFrame";
 import { Reveal } from "./Reveal";
 import { StickyColumn } from "./StickyColumn";
 import { SectionWrapper } from "./SectionWrapper";
