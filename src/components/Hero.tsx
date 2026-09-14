@@ -1,4 +1,3 @@
-import { BackgroundTexture } from "./BackgroundTexture";
 import { EyebrowLabel } from "./EyebrowLabel";
 import { LinkArrow } from "./LinkArrow";
 import { PhotoFrame } from "./PhotoFrame";
@@ -9,7 +8,7 @@ import { RotatingHeadline } from "./RotatingHeadline";
 export function Hero() {
   return (
     <div
-      className="relative isolate overflow-hidden font-general"
+      className="relative isolate overflow-hidden font-general h-[100%]"
       style={{ height: "77vh" }}
     >
       <div
@@ -17,10 +16,10 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10"
       />
 
-      <div className="mx-auto max-w-content px-6 pt-16 md:pt-14">
+      <div className="mx-auto max-w-content px-6 pt-16 md:pt-14 h-[100%]">
         {/* items-start aligns the eyebrow's top edge with the top of the
             photo; the wider lg gap opens up negative space between them. */}
-        <Reveal className="grid items-start gap-12 lg:grid-cols-12 lg:gap-24">
+        <Reveal className="grid items-start gap-12 lg:grid-cols-12 lg:gap-24 h-[100%]">
           <div className="lg:col-span-6">
             <EyebrowLabel>PRATHAM DANGOL · FRONTEND DEVELOPER</EyebrowLabel>
 
@@ -58,12 +57,11 @@ export function Hero() {
 
           {/* No border, no rounding, no card — just the image, faded into the
               background on its left/top edges. */}
-          <div className="hidden lg:col-span-6 lg:-mr-6 lg:block xl:-mr-10">
+          <div className="hidden lg:col-span-6 lg:-mr-6 lg:block xl:-mr-10 h-[100%]">
             <PhotoFrame
               imageSrc="/img/profile.png"
               bordered={false}
               frameClassName="rounded-none"
-              page="hero"
             />
           </div>
         </Reveal>

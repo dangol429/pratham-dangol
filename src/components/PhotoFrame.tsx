@@ -22,7 +22,7 @@ interface PhotoFrameProps {
 }
 
 const PHOTO_TRANSITION =
-  "scale-105 transition-[filter,transform] duration-500 ease-out group-hover:scale-110 grayscale group-hover:grayscale-0 saturate-100 group-hover:saturate-[1.15] contrast-100 group-hover:contrast-[1.05]";
+  "transition-[filter,transform] duration-500 ease-out  grayscale group-hover:grayscale-0 saturate-100 group-hover:saturate-[1.15] contrast-100 group-hover:contrast-[1.05]";
 
 function buildEdgeMask(fadeLeft?: boolean, fadeTop?: boolean) {
   const layers: string[] = [];
@@ -45,7 +45,6 @@ export function PhotoFrame({
   imageAlt = "",
   className = "",
   frameClassName = "rounded-2xl",
-  aspectClassName = "aspect-[4/5]",
   bordered = true,
   fadeLeft = false,
   fadeTop = false,
@@ -54,15 +53,16 @@ export function PhotoFrame({
 
   return (
     <div
-      className={`group relative w-full overflow-hidden ${bordered ? "border border-foreground/10" : ""} ${aspectClassName} ${frameClassName} ${className}`}
+      className={`group w-full h-[100%] ${bordered ? "border border-foreground/10" : ""} ${frameClassName} ${className}`}
       style={edgeMaskStyle}
     >
       {imageSrc ? (
         <Image
           src={imageSrc}
           alt={imageAlt}
-          fill
-          className={`object-cover ${PHOTO_TRANSITION}`}
+          width={1231}
+          height={1212}
+          className={`overflow-visible object-cover w-[auto] h-[100%] ${PHOTO_TRANSITION}`}
         />
       ) : (
         <>
