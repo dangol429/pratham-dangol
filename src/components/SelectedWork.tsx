@@ -12,8 +12,8 @@ export function SelectedWork() {
         eyebrow="Selected work"
         heading="A few things I've shipped."
       >
-        A handful of products I&apos;ve designed, built, and shipped end-to-end
-        — from system design and UI through production code, tests, and deploys.
+        A handful of products I&apos;ve designed, built, and shipped end-to-end,
+        from system design and UI through production code, tests, and deploys.
       </SectionIntro>
 
       <div className="mt-16 md:mt-20">

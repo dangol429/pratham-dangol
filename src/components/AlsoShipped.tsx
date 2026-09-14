@@ -20,7 +20,7 @@ export function AlsoShipped({ items }: AlsoShippedProps) {
           <div key={item.index} className="flex flex-wrap items-center justify-between gap-6 py-6">
             <div className="min-w-[240px] flex-1">
               <p className="font-mono text-sm text-muted">
-                <span className="text-accent">{item.index} —</span>{" "}
+                <span className="text-accent">{item.index} /</span>{" "}
                 <span className="text-foreground">{item.name}</span> · {item.url}
               </p>
               <p className="mt-1 text-sm text-muted">{item.description}</p>

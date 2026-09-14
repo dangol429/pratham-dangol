@@ -1,18 +1,20 @@
 /**
  * Directional arrow for links and buttons. Direction carries meaning:
  *  - "up-right"   leaves the site (external, new tab, mailto)
+ *  - "right"      navigates to another page on this site
  *  - "down-right" scrolls somewhere further down this page
  *  - "down"       downloads a file
  *
  * Drawn as an SVG sized in `em` so it scales with the label's font-size and
- * sits on the text's optical centre — unlike the unicode glyphs (↗ → ↘) this
+ * sits on the text's optical centre, unlike the unicode glyphs (↗ → ↘) this
  * replaces, which changed size and baseline depending on the font.
  * Spacing is handled by the parent's flex `gap`, never a hardcoded margin.
  */
-type ArrowDirection = "up-right" | "down-right" | "down";
+type ArrowDirection = "up-right" | "right" | "down-right" | "down";
 
 const ROTATION: Record<ArrowDirection, string> = {
   "up-right": "rotate-0",
+  right: "rotate-45",
   "down-right": "rotate-90",
   down: "rotate-[135deg]",
 };

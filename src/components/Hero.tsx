@@ -8,7 +8,7 @@ import { RotatingHeadline } from "./RotatingHeadline";
 export function Hero() {
   return (
     <div
-      className="relative isolate overflow-hidden font-general h-[100%]"
+      className="relative isolate overflow-hidden font-display h-[100%]"
       style={{ height: "77vh" }}
     >
       <div
@@ -21,18 +21,24 @@ export function Hero() {
             photo; the wider lg gap opens up negative space between them. */}
         <Reveal className="grid items-start gap-12 lg:grid-cols-12 lg:gap-24 h-[100%]">
           <div className="lg:col-span-6">
-            <EyebrowLabel>PRATHAM DANGOL · FRONTEND DEVELOPER</EyebrowLabel>
+            {/* The accent square carries the colour on its own; the name
+                leads in full-strength foreground and the role sits back. */}
+            <EyebrowLabel tone="muted">
+              <span className="text-foreground">Pratham Dangol</span>
+              <span className="mx-2 text-foreground/30">/</span>
+              <span className="text-muted">Frontend Developer</span>
+            </EyebrowLabel>
 
             <RotatingHeadline className="mt-6" />
 
-            <p className="mt-8 max-w-lg text-base leading-relaxed text-muted">
+            <p className="mt-8 max-w-lg text-[15px] leading-[1.625] text-muted">
               I&apos;m a frontend developer working remotely with{" "}
               {/* Emphasis via accent colour at the same weight as the
-                  surrounding copy — <strong> keeps the semantics. */}
+                  surrounding copy; <strong> keeps the semantics. */}
               <strong className="font-normal text-accent">
                 3+ years building production React and TypeScript
               </strong>{" "}
-              applications — from real-time features to{" "}
+              applications, from real-time features to{" "}
               <strong className="font-normal text-accent">
                 fully tested, reliable interfaces
               </strong>{" "}
@@ -51,11 +57,11 @@ export function Hero() {
             </div>
 
             <p className="mt-6 font-mono text-xs uppercase tracking-widest text-muted">
-              Remote · Open to roles &amp; contracts
+              Nepal · Remote · Open to roles &amp; contracts
             </p>
           </div>
 
-          {/* No border, no rounding, no card — just the image, faded into the
+          {/* No border, no rounding, no card, just the image, faded into the
               background on its left/top edges. */}
           <div className="hidden lg:col-span-6 lg:-mr-6 lg:block xl:-mr-10 h-[100%]">
             <PhotoFrame

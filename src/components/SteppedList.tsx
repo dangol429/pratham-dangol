@@ -16,7 +16,7 @@ interface SteppedListProps {
 }
 
 // Fixed dark palette (white/accent-vivid), matching TerminalCard's
-// intentional theme-independence — this is a UI mockup, not page chrome, so
+// intentional theme-independence, this is a UI mockup, not page chrome, so
 // it should read the same in light or dark mode.
 export function SteppedList({ rows, stepMs = 1350, className = "" }: SteppedListProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -24,7 +24,7 @@ export function SteppedList({ rows, stepMs = 1350, className = "" }: SteppedList
   const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Only animate while the card is actually visible — no wasted work
+  // Only animate while the card is actually visible, no wasted work
   // off-screen.
   useEffect(() => {
     const el = containerRef.current;

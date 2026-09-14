@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ResumeViewer } from "@/components/ResumeViewer";
 
 export const metadata: Metadata = {
-  title: "Resume — Pratham Dangol",
+  title: "Resume",
   description: "Resume for Pratham Dangol, frontend developer.",
 };
 

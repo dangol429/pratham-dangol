@@ -12,7 +12,7 @@ import { Pill } from "./Pill";
 type ViewerStatus = "checking" | "rendering" | "ready" | "error";
 
 // pdf.js touches browser-only globals (DOMMatrix, canvas), so the renderer is
-// loaded client-side only — never server-rendered.
+// loaded client-side only, never server-rendered.
 const PdfCanvas = dynamic(() => import("./PdfCanvas"), {
   ssr: false,
   loading: () => null,
@@ -48,19 +48,19 @@ export function ResumeViewer() {
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <EyebrowLabel>Resume</EyebrowLabel>
-          <h1 className="mt-3 text-[clamp(1.75rem,4.5vw,2.25rem)] font-sans font-extrabold tracking-tight text-foreground">
-            Pratham Dangol — Resume
+          <h1 className="mt-3 text-[clamp(1.75rem,4.5vw,2.25rem)] font-display font-bold tracking-tight text-foreground">
+            Pratham Dangol · Resume
           </h1>
         </div>
       </div>
 
       {/* Rendered page(s). The card frame matches the site's other surfaces;
-          everything inside is drawn by us onto <canvas> — no native PDF
+          everything inside is drawn by us onto <canvas>, no native PDF
           toolbar, sidebar, zoom or page controls. */}
       <div className="mx-auto mt-8 w-full max-w-[800px]">
         <div className="overflow-hidden rounded-2xl border border-foreground/10 bg-surface p-3 sm:p-4">
           {status === "error" ? (
-            // No button here — the controls directly below already carry
+            // No button here; the controls directly below already carry
             // Download / Open in new tab.
             <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
               <p className="text-sm leading-relaxed text-muted">

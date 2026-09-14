@@ -19,7 +19,7 @@ export default function PdfCanvas({ file, onReady, onFail }: PdfCanvasProps) {
   const [pageCount, setPageCount] = useState(0);
 
   // Track the container width so each page re-renders at the right scale on
-  // resize — canvas output is raster, so without this it would blur or clip.
+  // resize; canvas output is raster, so without this it would blur or clip.
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -47,7 +47,7 @@ export default function PdfCanvas({ file, onReady, onFail }: PdfCanvasProps) {
         error=""
         noData=""
       >
-        {/* Multiple pages stack vertically as a continuous scroll — no
+        {/* Multiple pages stack vertically as a continuous scroll, no
             paginated controls. */}
         {Array.from({ length: pageCount }, (_, i) => (
           <div key={i} className={i > 0 ? "mt-4" : ""}>

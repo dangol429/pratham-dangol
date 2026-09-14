@@ -16,7 +16,7 @@ interface PhotoFrameProps {
   bordered?: boolean;
   /** Fades the image to transparent on its left edge (and top, if
    * fadeTop is also set) so it dissolves into the page background instead
-   * of reading as a hard-edged card — used for full-bleed placements. */
+   * of reading as a hard-edged card, used for full-bleed placements. */
   fadeLeft?: boolean;
   fadeTop?: boolean;
 }

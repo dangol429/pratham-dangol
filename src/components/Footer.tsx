@@ -13,7 +13,7 @@ export function Footer() {
           <div className="max-w-xs">
             <Logo />
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Frontend developer building fast, tested interfaces — remotely.
+              Frontend developer building fast, tested interfaces, remotely.
             </p>
           </div>
 
@@ -36,7 +36,7 @@ export function Footer() {
             <EyebrowLabel>Contact</EyebrowLabel>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-foreground"
+              className="mt-4 flex w-fit items-center gap-1.5 text-sm text-muted transition-colors hover:text-foreground"
             >
               {CONTACT_EMAIL}
               <LinkArrow />
@@ -64,7 +64,7 @@ export function Footer() {
           aria-hidden="true"
         >
           <p
-            className="select-none text-center font-sans font-extrabold text-foreground/10"
+            className="select-none text-center font-display font-bold text-foreground/10"
             style={{
               fontSize: "clamp(4rem, 24vw, 15rem)",
               lineHeight: 0.8,

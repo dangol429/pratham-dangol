@@ -14,7 +14,7 @@ interface StickyColumnProps {
  * Two requirements for this to actually work:
  *  - the parent row must use `items-start`, otherwise the grid stretches this
  *    item to full row height and sticky has zero travel;
- *  - it only engages at `lg`, where the two-column layout exists — below that
+ *  - it only engages at `lg`, where the two-column layout exists, below that
  *    the columns are stacked and sticky would just pin content oddly.
  *
  * top-24 (96px) clears the nav capsule, whose bottom edge sits at 74px

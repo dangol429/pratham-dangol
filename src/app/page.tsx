@@ -6,17 +6,7 @@ import { HowIBuild } from "@/components/HowIBuild";
 import { Marquee } from "@/components/Marquee";
 import { SelectedWork } from "@/components/SelectedWork";
 import { Stack } from "@/components/Stack";
-
-const TECH_STACK = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "GraphQL",
-  "Cypress",
-  "Jest",
-  "Tailwind CSS",
-  "FastAPI",
-];
+import { MARQUEE_TECH } from "@/data/tech";
 
 export default function Home() {
   return (
@@ -24,7 +14,7 @@ export default function Home() {
       <Hero />
       <BackgroundTexture />
 
-      <Marquee items={TECH_STACK} />
+      <Marquee items={MARQUEE_TECH} />
       <SelectedWork />
       <HowIBuild />
       <About />

@@ -1,6 +1,6 @@
 export const CONTACT_EMAIL = "prathamdangol@gmail.com";
 
-/** Local static asset in /public — never an external URL. */
+/** Local static asset in /public, never an external URL. */
 export const RESUME_PATH = "/resume.pdf";
 
 // Hash targets are written as "/#id" rather than "#id" because the nav and

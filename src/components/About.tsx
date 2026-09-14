@@ -9,7 +9,7 @@ import { SectionWrapper } from "./SectionWrapper";
 interface TimelineItem {
   role: string;
   company: string;
-  /** Links the company name only — the location stays plain text. */
+  /** Links the company name only; the location stays plain text. */
   companyHref?: string;
   location?: string;
   dates: string;
@@ -22,22 +22,22 @@ const TIMELINE: TimelineItem[] = [
     company: "AlgoBulls",
     companyHref: ALGOBULLS_LINKEDIN,
     location: "Remote, US",
-    dates: "Jan 2025 — Present",
+    dates: "Jan 2025 - Present",
     description:
-      "Work on Strategy Builder, RunScreen, Phoenix, and an internal SEO audit agent for an AI algorithmic trading platform.",
+      "Build multi-dashboard interfaces and strategy-building flows for an AI algorithmic trading platform: React and TypeScript throughout, Redux for state that has to stay consistent across screens, GraphQL for the data layer, and Cypress and Jest on the paths that can't break.",
   },
   {
     role: "Intern → Frontend Developer",
     company: "AlgoBulls",
     companyHref: ALGOBULLS_LINKEDIN,
     location: "Remote, US",
-    dates: "Jan 2024 — Jan 2025",
+    dates: "Jan 2024 - Jan 2025",
   },
   {
     role: "Full-Stack Developer",
     company: "OntTech Solutions",
     location: "Remote, Australia",
-    dates: "Aug 2023 — Dec 2024",
+    dates: "Aug 2023 - Dec 2024",
     description: "Freelance full-stack work on an elderly-care platform.",
   },
   {
@@ -51,9 +51,11 @@ const TIMELINE: TimelineItem[] = [
 export function About() {
   return (
     <SectionWrapper id="about">
-      <EyebrowLabel>About</EyebrowLabel>
+      <div className="border-b border-foreground/10 pb-4 lg:w-[calc(50%-2rem)]">
+        <EyebrowLabel tone="muted">About</EyebrowLabel>
+      </div>
 
-      <Reveal className="mt-6 grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+      <Reveal className="mt-8 grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
         <StickyColumn className="lg:col-span-4">
           {/* Same portrait as the hero, same grayscale→colour hover. The hero
               copy is decorative (empty alt); this one carries the real alt so
@@ -72,7 +74,7 @@ export function About() {
                 <br />
                 VTU Bangalore (Acharya Institute of Technology)
                 <br />
-                2019 — 2023
+                2019 - 2023
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 +2 Computer Science
@@ -105,7 +107,7 @@ export function About() {
               understanding the workflow matters as much as the implementation.
             </p>
             <p>
-              That shows up in how I&apos;ve worked — freelancing full-stack on
+              That shows up in how I&apos;ve worked: freelancing full-stack on
               a care platform for an Australian client, then moving from intern
               to full-time frontend engineer on an algorithmic trading platform,
               where I&apos;ve worked across everything from strategy-builder UIs
@@ -113,7 +115,7 @@ export function About() {
             </p>
             <p>
               Outside of client work, I&apos;m deepening my backend fundamentals
-              through FastAPI and Python — mostly so the systems I build
+              through FastAPI and Python, mostly so the systems I build
               end-to-end make sense on both sides of the API, not just the UI.
             </p>
           </div>

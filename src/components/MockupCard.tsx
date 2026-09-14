@@ -6,37 +6,18 @@ interface MockupCardProps {
   className?: string;
 }
 
-// Shared "fake app window" chrome — traffic-light dots + label bar over a
-// dark card. Intentionally fixed-dark regardless of site theme (a
-// light-mode terminal/mockup reads as inauthentic), used by both
-// TerminalCard and the stepper-list mockup cards.
-export function MockupCard({
-  label,
-  children,
-  className = "",
-}: MockupCardProps) {
+// A flat mockup surface: the content leads, and the label sits underneath as
+// a caption rather than in window chrome. Intentionally fixed-dark regardless
+// of site theme (a light-mode terminal/mockup reads as inauthentic).
+export function MockupCard({ label, children, className = "" }: MockupCardProps) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-white/10 bg-ink ${className}`}
+      className={`overflow-hidden rounded-2xl border border-white/10 bg-ink px-6 py-8 ${className}`}
     >
-      <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
-        <span
-          className="h-2.5 w-2.5 rounded-full bg-white/15"
-          aria-hidden="true"
-        />
-        <span
-          className="h-2.5 w-2.5 rounded-full bg-white/15"
-          aria-hidden="true"
-        />
-        <span
-          className="h-2.5 w-2.5 rounded-full bg-white/15"
-          aria-hidden="true"
-        />
-        <span className="ml-2 truncate font-mono text-xs text-white/40">
-          {label}
-        </span>
+      {children}
+      <div className="mt-8 border-t border-white/10 pt-5">
+        <p className="truncate font-mono text-xs text-white/35">{label}</p>
       </div>
-      <div className="px-5 py-8">{children}</div>
     </div>
   );
 }

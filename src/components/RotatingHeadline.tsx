@@ -3,21 +3,16 @@
 import { useEffect, useState } from "react";
 import { GlitchText } from "./GlitchText";
 
+// Kept to a similar length on purpose: every phrase shares one reserved
+// height, so one that wraps to fewer lines than the tallest leaves dead space
+// above the paragraph below. At these lengths they all wrap to two lines on
+// desktop, which means no slack at all.
 export const HERO_PHRASES = [
-  "I build frontends that are fast, tested, and built to last.",
-  "I use AI tooling to ship production features faster.",
-  "I care about the whole system, not just the UI layer.",
-  "I turn messy requirements into reliable products.",
+  "I build fast, tested frontends that last.",
+  "I use AI tooling to ship features faster.",
+  "I care about the system, not just the UI.",
+  "I turn vague requests into real products.",
 ];
-
-// Longest phrase by character count — rendered invisibly in normal flow so
-// the rotator always reserves exactly the height its tallest wrap needs, at
-// any viewport width. This tracks the headline's clamp() sizing exactly
-// (unlike a hardcoded min-height per breakpoint), so it can't drift out of
-// sync and let a phrase overflow into the content below.
-const LONGEST_PHRASE = HERO_PHRASES.reduce((longest, phrase) =>
-  phrase.length > longest.length ? phrase : longest,
-);
 
 const CYCLE_MS = 5000;
 
@@ -26,7 +21,7 @@ const CYCLE_MS = 5000;
 // extrabold: 700 is General Sans's heaviest real weight, and 800 would be
 // synthesised.
 const HEADLINE_TEXT_CLASSES =
-  "text-[clamp(1.5rem,4vw,2.5rem)] font-general font-bold leading-[1.08] tracking-tight";
+  "text-[clamp(1.5rem,4vw,2.5rem)] font-display font-bold leading-[1.08] tracking-tight";
 
 interface RotatingHeadlineProps {
   className?: string;
@@ -61,22 +56,31 @@ export function RotatingHeadline({ className = "" }: RotatingHeadlineProps) {
   }, []);
 
   return (
-    <div className={`relative ${className}`}>
-      {/*
-        Invisible spacer in normal flow — same font/clamp classes as the
-        real headline below — so this container is always exactly tall
-        enough for the longest phrase's wrap at the current viewport width.
-        This is what keeps the layout stable across 1-3 line phrases.
-      */}
-      <div aria-hidden="true" className={`invisible ${HEADLINE_TEXT_CLASSES}`}>
-        {LONGEST_PHRASE}
-      </div>
+    // Every phrase is stacked into the same grid cell, so the row is exactly
+    // as tall as whichever one wraps tallest at the current width. Measuring
+    // the longest string instead would be wrong: the most characters and the
+    // most lines aren't the same phrase once a long word forces an early wrap.
+    <div className={`grid ${className}`}>
+      {HERO_PHRASES.map((phrase) => (
+        <div
+          key={phrase}
+          aria-hidden="true"
+          className={`invisible [grid-area:1/1] ${HEADLINE_TEXT_CLASSES}`}
+        >
+          {phrase}
+        </div>
+      ))}
 
-      <GlitchText
-        text={HERO_PHRASES[index]}
-        as="h1"
-        className={`absolute inset-0 top-0 text-foreground ${HEADLINE_TEXT_CLASSES}`}
-      />
+      {/* Centred in that cell rather than pinned to the top, so any slack
+          splits above and below instead of pooling between the headline and
+          the paragraph under it. */}
+      <div className="flex items-center [grid-area:1/1]">
+        <GlitchText
+          text={HERO_PHRASES[index]}
+          as="h1"
+          className={`text-foreground ${HEADLINE_TEXT_CLASSES}`}
+        />
+      </div>
     </div>
   );
 }

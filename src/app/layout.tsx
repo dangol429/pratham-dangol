@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { IntroScreen } from "@/components/IntroScreen";
 import { Nav } from "@/components/Nav";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -17,15 +18,10 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-});
-
 // General Sans (Fontshare), self-hosted so there's no CDN round-trip or
-// font-swap flash. Ships 400-700 only — 700 is its heaviest weight, which is
-// why the hero headline uses font-bold rather than font-extrabold (800 would
-// be synthesised and read blobby).
+// font-swap flash. Ships 400-700 only; 700 is its heaviest weight, which is
+// why titles use font-bold rather than font-extrabold (800 would be
+// synthesised and read blobby).
 const generalSans = localFont({
   variable: "--font-general-sans",
   display: "swap",
@@ -38,19 +34,33 @@ const generalSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Portfolio site",
+  title: {
+    default: "Pratham Dangol - Frontend Developer",
+    // Child routes set a bare title ("Resume") and get the name appended.
+    template: "%s / Pratham Dangol",
+  },
+  description:
+    "Frontend developer with 3+ years building production React and TypeScript interfaces, from real-time features to fully tested UI. Remote from Nepal, open to roles and contracts.",
+  openGraph: {
+    title: "Pratham Dangol - Frontend Developer",
+    description:
+      "Frontend developer with 3+ years building production React and TypeScript interfaces. Remote from Nepal, open to roles and contracts.",
+    siteName: "Pratham Dangol",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${generalSans.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${generalSans.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background font-sans text-foreground antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <IntroScreen />
           <SmoothScroll />
           <a
             href="#main-content"

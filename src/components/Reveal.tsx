@@ -13,7 +13,7 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
 
   // initial/whileInView values stay identical regardless of shouldReduceMotion
-  // (which is null on the server and only resolves after hydration) — only
+  // (which is null on the server and only resolves after hydration), only
   // the transition duration branches, since that never affects the
   // server-rendered inline style and so can't cause a hydration mismatch.
   return (

@@ -1,41 +1,21 @@
+import { TECH_CATEGORIES, type Tech } from "@/data/tech";
 import { Reveal } from "./Reveal";
 import { SectionIntro } from "./SectionIntro";
 import { SectionWrapper } from "./SectionWrapper";
-import { Tag } from "./Tag";
 
-interface StackCategory {
-  title: string;
-  principle: string;
-  tags: string[];
+function SkillItem({ skill }: { skill: Tech }) {
+  const Icon = skill.icon;
+  return (
+    <span className="inline-flex items-center gap-2 font-mono text-sm text-muted">
+      <Icon
+        className="h-4 w-4 shrink-0"
+        style={skill.color ? { color: skill.color } : undefined}
+        aria-hidden="true"
+      />
+      {skill.label}
+    </span>
+  );
 }
-
-const CATEGORIES: StackCategory[] = [
-  {
-    title: "Frontend & UI",
-    principle: "The interface is part of the product, not a layer added at the end.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "GraphQL"],
-  },
-  {
-    title: "Testing & Quality",
-    principle: "I'd rather catch a regression in CI than in a bug report.",
-    tags: ["Cypress", "Jest"],
-  },
-  {
-    title: "Backend & Data",
-    principle: "I prefer simple systems that keep important logic close to the data.",
-    // TODO(Pratham): confirm the real DB/stack beyond FastAPI + Python.
-    tags: ["FastAPI", "Python", "DB TBD"],
-  },
-  {
-    title: "Tooling & Workflow",
-    principle:
-      "Simple, boring tooling that gets out of the way — fewer moving parts between a commit and a deploy.",
-    // TODO(Pratham): confirm the full tooling list. Vercel is inferred from the Sathi
-    // deploy URL and Git is assumed — add/remove to match what you actually use
-    // (CI, editor, design tools, etc.).
-    tags: ["Git", "GitHub", "Vercel"],
-  },
-];
 
 export function Stack() {
   return (
@@ -45,16 +25,23 @@ export function Stack() {
       </SectionIntro>
 
       <Reveal className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:mt-20">
-        {CATEGORIES.map((category) => (
+        {TECH_CATEGORIES.map((category) => (
           <div
             key={category.title}
             className="rounded-2xl border border-foreground/10 bg-foreground/[0.03] p-8"
           >
             <h3 className="text-lg font-bold text-foreground">{category.title}</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">{category.principle}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {category.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-3">
+              {category.skills.map((skill, index) => (
+                <span key={skill.label} className="inline-flex items-center gap-x-3">
+                  <SkillItem skill={skill} />
+                  {index < category.skills.length - 1 && (
+                    <span className="text-foreground/20" aria-hidden="true">
+                      |
+                    </span>
+                  )}
+                </span>
               ))}
             </div>
           </div>

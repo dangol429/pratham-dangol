@@ -22,16 +22,10 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
+        // General Sans — every title on the site, not just the hero.
         display: [
-          "var(--font-space-grotesk)",
-          "var(--font-inter)",
-          "system-ui",
-          "sans-serif",
-        ],
-        // General Sans — currently applied to the hero only (see Hero.tsx).
-        general: [
           "var(--font-general-sans)",
-          "var(--font-inter)",
+          "ui-sans-serif",
           "system-ui",
           "sans-serif",
         ],
@@ -44,9 +38,11 @@ const config: Config = {
         "section-lg": "6rem",
       },
       keyframes: {
+        // Shifts by exactly one copy's width (1 / REPEAT_COUNT in
+        // Marquee.tsx, currently 6 copies) so the loop is seamless.
         marquee: {
           "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(-16.6667%)" },
         },
       },
       animation: {

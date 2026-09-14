@@ -12,8 +12,12 @@ interface SectionIntroProps {
 export function SectionIntro({ eyebrow, heading, children }: SectionIntroProps) {
   return (
     <Reveal>
-      <EyebrowLabel>{eyebrow}</EyebrowLabel>
-      <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-16">
+      {/* The rule stops at the heading column's width. lg:gap-16 is 4rem, so
+          a 6-of-12 column is calc(50% - 2rem). */}
+      <div className="border-b border-foreground/10 pb-4 lg:w-[calc(50%-2rem)]">
+        <EyebrowLabel tone="muted">{eyebrow}</EyebrowLabel>
+      </div>
+      <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-6">
           <GhostHeading
             as="h2"

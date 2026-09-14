@@ -43,7 +43,7 @@ const RGB_LAYERS = [
   },
 ];
 
-// Horizontal "slice" bands — a thin clipped strip that jumps sideways and
+// Horizontal "slice" bands, a thin clipped strip that jumps sideways and
 // holds, mimicking a scanline tear. The two bands alternate across the
 // window so there are four distinct tears rather than one blip.
 const SLICE_LAYERS = [
@@ -68,7 +68,7 @@ export function GlitchText({ text, as: Tag = "span", className = "" }: GlitchTex
   const [glitchId, setGlitchId] = useState(0);
 
   // Adjusting state during render (React's documented pattern for "reset
-  // state when a prop changes") instead of in an effect — reduced-motion
+  // state when a prop changes") instead of in an effect, reduced-motion
   // hard-cuts by simply never entering the glitching branch.
   if (text !== prevText) {
     setPrevText(text);
@@ -89,7 +89,7 @@ export function GlitchText({ text, as: Tag = "span", className = "" }: GlitchTex
   return (
     <Tag className={className}>
       <span className="relative block w-full">
-        {/* Clean base layer — always present, this is what's announced to AT. */}
+        {/* Clean base layer, always present; this is what's announced to AT. */}
         <span className="block">{text}</span>
 
         {glitching && (

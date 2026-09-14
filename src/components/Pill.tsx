@@ -15,7 +15,7 @@ type PillVariant = "primary" | "secondary";
 
 // `pill` drives the shared interaction layer in globals.css: the ambient
 // shine sweep (::after) and the cursor-follow spotlight (::before).
-// gap-2 spaces a trailing <LinkArrow /> from the label — no effect on
+// gap-2 spaces a trailing <LinkArrow /> from the label, no effect on
 // single-child pills.
 const baseClasses =
   "pill inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-2.5 text-sm font-medium transition-[color,background-color,border-color,transform] duration-150 ease-out";
@@ -35,7 +35,7 @@ interface PillOwnProps {
 type PillAsLink = PillOwnProps &
   AnchorHTMLAttributes<HTMLAnchorElement> & {
     href: string;
-    /** Render a plain <a> instead of next/link — for external URLs and
+    /** Render a plain <a> instead of next/link, for external URLs and
      * static files like /resume.pdf, which shouldn't be client-routed
      * or prefetched. */
     external?: boolean;
@@ -51,7 +51,7 @@ export function Pill({ variant = "primary", children, className = "", ...props }
   const frame = useRef(0);
 
   // Random per-instance offset so multiple visible buttons don't glint in
-  // unison — in sync reads robotic. Written straight to the node rather than
+  // unison; in sync reads robotic. Written straight to the node rather than
   // held in state: Math.random() can't run during SSR without causing a
   // hydration mismatch, and this is a one-shot DOM write.
   useEffect(() => {
@@ -68,7 +68,7 @@ export function Pill({ variant = "primary", children, className = "", ...props }
     const el = ref.current;
     if (!el) return;
 
-    // Read coordinates now — the event must not be touched inside the rAF.
+    // Read coordinates now; the event must not be touched inside the rAF.
     const { clientX, clientY } = event;
     if (frame.current) return;
 

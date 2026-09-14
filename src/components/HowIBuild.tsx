@@ -38,7 +38,7 @@ export function HowIBuild() {
   return (
     <SectionWrapper id="how-i-build">
       <SectionIntro eyebrow="How I build" heading="How I actually work.">
-        Five steps I default to on every build — from a weekend project to a growing product. No
+        Five steps I default to on every build, from a weekend project to a growing product. No
         process theater, just what keeps things honest as scope grows.
       </SectionIntro>
 

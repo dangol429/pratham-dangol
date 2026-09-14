@@ -5,7 +5,7 @@
 /* Dark is the site's baseline/fallback palette (see .dark below for the
    live values next-themes applies). .light overrides for light mode. */
 :root {
-  --color-background: #050505;
+  --color-background: #09090b;
   --color-surface: #101010;
   --color-foreground: #f2f2f0;
   --color-accent: #a8ff60;
@@ -38,10 +38,86 @@ body {
     color 0.2s ease;
 }
 
+/* Every title on the site is General Sans, set here rather than per
+   component so a heading can't miss it by forgetting a utility class. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-general-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Reload intro (see IntroScreen.tsx) ───────────────────────────────────
+   A full-bleed cover that paints with the first frame and animates itself
+   away. `visibility: hidden` at the end takes it out of the a11y tree and
+   off the hit-testing path for good. */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--color-background);
+  animation: intro-cover-out 500ms cubic-bezier(0.4, 0, 0.2, 1) 1250ms forwards;
+}
+
+.intro-word {
+  display: flex;
+  font-family: var(--font-general-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2rem, 9vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-foreground);
+}
+
+.intro-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(var(--intro-shift)) scale(1.12);
+  animation: intro-letter-in 900ms cubic-bezier(0.16, 1, 0.3, 1)
+    var(--intro-delay) forwards;
+}
+
+@keyframes intro-letter-in {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--intro-shift)) scale(1.12);
+  }
+  45% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes intro-cover-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No sliding letters, and the cover clears almost immediately. */
+  .intro-screen {
+    animation: intro-cover-out 200ms linear 200ms forwards;
+  }
+
+  .intro-letter {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 /* ── Shared button interaction layer (see Pill.tsx) ────────────────────────
    Two independent pseudo-element layers so they can never fight each other:
-     ::after  — ambient shine sweep, runs on a 5s loop regardless of hover
-     ::before — cursor-follow spotlight, only visible while hovered
+     ::after:  ambient shine sweep, runs on a 5s loop regardless of hover
+     ::before: cursor-follow spotlight, only visible while hovered
    Both use currentColor so they contrast on either variant in either theme:
    the filled pill's text colour is `background` (dark band on a light fill),
    the outlined pill's is `foreground` (light band on a dark surface). */
@@ -54,7 +130,7 @@ body {
 }
 
 /* Cursor spotlight. Position comes from custom properties written by the
-   rAF-throttled mousemove handler — no DOM node is moved. */
+   rAF-throttled mousemove handler; no DOM node is moved. */
 .pill::before {
   content: "";
   position: absolute;
@@ -123,7 +199,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* No looping sweep, no spotlight, no scale — just the variant's own
+  /* No looping sweep, no spotlight, no scale; just the variant's own
      colour hover, plus a small instant brightness lift. */
   .pill::after,
   .pill::before {
