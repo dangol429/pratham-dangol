@@ -14,7 +14,14 @@ const GRAIN_DATA_URL = `data:image/svg+xml,${encodeURIComponent(GRAIN_SVG)}`;
 // it — currently just the hero — rather than covering the whole viewport.
 export function BackgroundTexture() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10"
+      style={{
+        background:
+          "radial-gradient(58% 42% at 12% -4%, rgba(255,255,255,0.07), transparent 70%), radial-gradient(52% 38% at 88% 0%, rgba(255,255,255,0.055), transparent 72%)",
+      }}
+    >
       <div
         className="absolute inset-0 text-foreground"
         style={{

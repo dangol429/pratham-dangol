@@ -1,5 +1,6 @@
 import type { AlsoShippedItem } from "@/data/work";
 import { EyebrowLabel } from "./EyebrowLabel";
+import { LinkArrow } from "./LinkArrow";
 import { Pill } from "./Pill";
 import { Tag } from "./Tag";
 
@@ -32,7 +33,8 @@ export function AlsoShipped({ items }: AlsoShippedProps) {
 
             {item.href && (
               <Pill href={item.href} variant="secondary" className="px-4 py-2 text-xs">
-                Case study →
+                Case study
+                <LinkArrow />
               </Pill>
             )}
           </div>

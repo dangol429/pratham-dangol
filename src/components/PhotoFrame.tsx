@@ -26,10 +26,17 @@ const PHOTO_TRANSITION =
 
 function buildEdgeMask(fadeLeft?: boolean, fadeTop?: boolean) {
   const layers: string[] = [];
-  if (fadeLeft) layers.push("linear-gradient(to right, transparent 0%, black 18%)");
-  if (fadeTop) layers.push("linear-gradient(to bottom, transparent 0%, black 14%)");
+  if (fadeLeft)
+    layers.push("linear-gradient(to right, transparent 0%, black 18%)");
+  if (fadeTop)
+    layers.push("linear-gradient(to bottom, transparent 0%, black 14%)");
   if (layers.length === 0) return undefined;
-  return { maskImage: layers.join(", "), WebkitMaskImage: layers.join(", "), maskComposite: "intersect" as const, WebkitMaskComposite: "source-in" as const };
+  return {
+    maskImage: layers.join(", "),
+    WebkitMaskImage: layers.join(", "),
+    maskComposite: "intersect" as const,
+    WebkitMaskComposite: "source-in" as const,
+  };
 }
 
 export function PhotoFrame({
@@ -51,7 +58,12 @@ export function PhotoFrame({
       style={edgeMaskStyle}
     >
       {imageSrc ? (
-        <Image src={imageSrc} alt={imageAlt} fill className={`object-cover ${PHOTO_TRANSITION}`} />
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          className={`object-cover ${PHOTO_TRANSITION}`}
+        />
       ) : (
         <>
           <div

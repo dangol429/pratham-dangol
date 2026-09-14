@@ -23,6 +23,7 @@ export default function Home() {
     <>
       <Hero />
       <BackgroundTexture />
+
       <Marquee items={TECH_STACK} />
       <SelectedWork />
       <HowIBuild />

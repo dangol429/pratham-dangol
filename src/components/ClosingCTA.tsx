@@ -1,6 +1,7 @@
 import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/data/site";
 import { EyebrowLabel } from "./EyebrowLabel";
 import { GhostHeading } from "./GhostHeading";
+import { LinkArrow } from "./LinkArrow";
 import { Pill } from "./Pill";
 import { Reveal } from "./Reveal";
 import { SectionWrapper } from "./SectionWrapper";
@@ -27,6 +28,7 @@ export function ClosingCTA() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Pill href={`mailto:${CONTACT_EMAIL}`} variant="primary">
               Get in touch
+              <LinkArrow />
             </Pill>
             {SOCIAL_LINKS.map((social) => (
               <Pill
@@ -38,6 +40,7 @@ export function ClosingCTA() {
                 variant="secondary"
               >
                 {social.label}
+                <LinkArrow />
               </Pill>
             ))}
           </div>

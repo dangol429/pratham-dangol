@@ -1,8 +1,10 @@
 import type { CaseStudy } from "@/data/work";
 import { EyebrowLabel } from "./EyebrowLabel";
+import { LinkArrow } from "./LinkArrow";
 import { MockupCard } from "./MockupCard";
 import { Pill } from "./Pill";
 import { SteppedList } from "./SteppedList";
+import { StickyColumn } from "./StickyColumn";
 import { Tag } from "./Tag";
 
 interface CaseStudyRowProps {
@@ -28,12 +30,12 @@ export function CaseStudyRow({ study, reverse = false }: CaseStudyRowProps) {
         ) : null}
       </div>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-16">
-        <div className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
+      <div className="mt-8 grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
+        <StickyColumn className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
           <MockupCard label={study.stepper.label}>
             <SteppedList rows={study.stepper.rows} />
           </MockupCard>
-        </div>
+        </StickyColumn>
 
         <div className={`lg:col-span-6 ${reverse ? "lg:order-1" : ""}`}>
           <h3 className="text-2xl font-bold text-foreground md:text-3xl">{study.name}</h3>
@@ -79,7 +81,8 @@ export function CaseStudyRow({ study, reverse = false }: CaseStudyRowProps) {
                     rel="noopener noreferrer"
                     variant="secondary"
                   >
-                    Case study →
+                    Case study
+                    <LinkArrow />
                   </Pill>
                 )
               )}
@@ -89,9 +92,10 @@ export function CaseStudyRow({ study, reverse = false }: CaseStudyRowProps) {
                   href={study.repoHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-xs uppercase tracking-widest text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted underline-offset-4 transition-colors hover:text-foreground"
                 >
-                  Repo ↗
+                  Repo
+                  <LinkArrow />
                 </a>
               )}
             </div>

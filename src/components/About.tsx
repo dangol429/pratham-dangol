@@ -1,8 +1,9 @@
 import { ALGOBULLS_LINKEDIN } from "@/data/site";
 import { EyebrowLabel } from "./EyebrowLabel";
 import { GhostHeading } from "./GhostHeading";
-import { PhotoFrame } from "./PhotoFrame";
+import { PhotoFrame } from "./PhotoFrame/PhotoFrame";
 import { Reveal } from "./Reveal";
+import { StickyColumn } from "./StickyColumn";
 import { SectionWrapper } from "./SectionWrapper";
 
 interface TimelineItem {
@@ -52,8 +53,8 @@ export function About() {
     <SectionWrapper id="about">
       <EyebrowLabel>About</EyebrowLabel>
 
-      <Reveal className="mt-6 grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-4">
+      <Reveal className="mt-6 grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+        <StickyColumn className="lg:col-span-4">
           {/* Same portrait as the hero, same grayscale→colour hover. The hero
               copy is decorative (empty alt); this one carries the real alt so
               screen readers announce it once, not twice. */}
@@ -87,7 +88,7 @@ export function About() {
               </p>
             </div>
           </div>
-        </div>
+        </StickyColumn>
 
         <div className="lg:col-span-8">
           <GhostHeading
@@ -99,20 +100,21 @@ export function About() {
 
           <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted">
             <p>
-              I&apos;m a frontend developer working across React, TypeScript, and modern frontend
-              tooling. I gravitate toward products where understanding the workflow matters as
-              much as the implementation.
+              I&apos;m a frontend developer working across React, TypeScript,
+              and modern frontend tooling. I gravitate toward products where
+              understanding the workflow matters as much as the implementation.
             </p>
             <p>
-              That shows up in how I&apos;ve worked — freelancing full-stack on a care platform
-              for an Australian client, then moving from intern to full-time frontend engineer on
-              an algorithmic trading platform, where I&apos;ve worked across everything from
-              strategy-builder UIs to an internal SEO audit agent.
+              That shows up in how I&apos;ve worked — freelancing full-stack on
+              a care platform for an Australian client, then moving from intern
+              to full-time frontend engineer on an algorithmic trading platform,
+              where I&apos;ve worked across everything from strategy-builder UIs
+              to an internal SEO audit agent.
             </p>
             <p>
-              Outside of client work, I&apos;m deepening my backend fundamentals through FastAPI
-              and Python — mostly so the systems I build end-to-end make sense on both sides of
-              the API, not just the UI.
+              Outside of client work, I&apos;m deepening my backend fundamentals
+              through FastAPI and Python — mostly so the systems I build
+              end-to-end make sense on both sides of the API, not just the UI.
             </p>
           </div>
 
@@ -127,10 +129,17 @@ export function About() {
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <div className="flex items-center gap-2.5">
-                      <span className="h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden="true" />
-                      <h3 className="text-base font-bold text-foreground">{item.role}</h3>
+                      <span
+                        className="h-1.5 w-1.5 shrink-0 bg-accent"
+                        aria-hidden="true"
+                      />
+                      <h3 className="text-base font-bold text-foreground">
+                        {item.role}
+                      </h3>
                     </div>
-                    <span className="font-mono text-xs text-muted">{item.dates}</span>
+                    <span className="font-mono text-xs text-muted">
+                      {item.dates}
+                    </span>
                   </div>
                   <p className="mt-1 pl-4 font-mono text-xs text-muted">
                     {item.companyHref ? (

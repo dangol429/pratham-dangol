@@ -21,8 +21,12 @@ const LONGEST_PHRASE = HERO_PHRASES.reduce((longest, phrase) =>
 
 const CYCLE_MS = 5000;
 
+// One step down in size from the previous clamp(1.75rem,5vw,3rem), with
+// tighter leading for denser stacking. font-bold (700) rather than
+// extrabold: 700 is General Sans's heaviest real weight, and 800 would be
+// synthesised.
 const HEADLINE_TEXT_CLASSES =
-  "text-[clamp(1.75rem,5vw,3rem)] font-sans font-extrabold tracking-tight";
+  "text-[clamp(1.5rem,4vw,2.5rem)] font-general font-bold leading-[1.08] tracking-tight";
 
 interface RotatingHeadlineProps {
   className?: string;

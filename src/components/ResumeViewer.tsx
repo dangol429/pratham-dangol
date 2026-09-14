@@ -1,29 +1,30 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { RESUME_PATH } from "@/data/site";
 import { EyebrowLabel } from "./EyebrowLabel";
+import { LinkArrow } from "./LinkArrow";
 import { Pill } from "./Pill";
 
-type ViewerStatus = "loading" | "ready" | "error";
+// "checking" → verifying the file exists before pdf.js ever sees it.
+// "rendering" → file is good, canvas is mounting.
+type ViewerStatus = "checking" | "rendering" | "ready" | "error";
 
-// Some mobile browsers refuse to render inline PDFs and never fire onError
-// either — they just show an empty frame. If nothing has loaded by this
-// point, fall back to the download prompt.
-const LOAD_TIMEOUT_MS = 4000;
+// pdf.js touches browser-only globals (DOMMatrix, canvas), so the renderer is
+// loaded client-side only — never server-rendered.
+const PdfCanvas = dynamic(() => import("./PdfCanvas"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export function ResumeViewer() {
-  const [status, setStatus] = useState<ViewerStatus>("loading");
+  const [status, setStatus] = useState<ViewerStatus>("checking");
 
-  useEffect(() => {
-    if (status !== "loading") return;
-    const timeout = setTimeout(() => setStatus("error"), LOAD_TIMEOUT_MS);
-    return () => clearTimeout(timeout);
-  }, [status]);
-
-  // An iframe pointed at a missing file still fires onLoad — it just renders
-  // the app's own 404 page nested inside the frame. Check the file is really
-  // there (and really a PDF) so we show the download fallback instead.
+  // Handing pdf.js a URL that 404s makes it throw a ResponseException as an
+  // unhandled rejection, which takes the whole route down rather than
+  // triggering onLoadError. So confirm the file is really there (and really
+  // a PDF) before mounting the renderer.
   useEffect(() => {
     let cancelled = false;
 
@@ -31,7 +32,7 @@ export function ResumeViewer() {
       .then((res) => {
         if (cancelled) return;
         const contentType = res.headers.get("content-type") ?? "";
-        if (!res.ok || contentType.includes("text/html")) setStatus("error");
+        setStatus(!res.ok || contentType.includes("text/html") ? "error" : "rendering");
       })
       .catch(() => {
         if (!cancelled) setStatus("error");
@@ -51,10 +52,50 @@ export function ResumeViewer() {
             Pratham Dangol — Resume
           </h1>
         </div>
+      </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+      {/* Rendered page(s). The card frame matches the site's other surfaces;
+          everything inside is drawn by us onto <canvas> — no native PDF
+          toolbar, sidebar, zoom or page controls. */}
+      <div className="mx-auto mt-8 w-full max-w-[800px]">
+        <div className="overflow-hidden rounded-2xl border border-foreground/10 bg-surface p-3 sm:p-4">
+          {status === "error" ? (
+            // No button here — the controls directly below already carry
+            // Download / Open in new tab.
+            <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
+              <p className="text-sm leading-relaxed text-muted">
+                Can&apos;t preview this file? Download it instead.
+              </p>
+            </div>
+          ) : (
+            <div className="relative">
+              {status !== "ready" && (
+                <div className="flex items-center justify-center py-24">
+                  <p className="font-mono text-xs uppercase tracking-widest text-muted">
+                    Loading resume…
+                  </p>
+                </div>
+              )}
+
+              {/* Only mounted once the file is confirmed present. */}
+              {status !== "checking" && (
+                <div className={status === "ready" ? "" : "hidden"}>
+                  <PdfCanvas
+                    file={RESUME_PATH}
+                    onReady={() => setStatus("ready")}
+                    onFail={() => setStatus("error")}
+                  />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Our own controls, replacing the browser's native download/print. */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Pill href={RESUME_PATH} external download variant="primary" className="text-xs">
-            Download
+            Download PDF
+            <LinkArrow direction="down" />
           </Pill>
           <Pill
             href={RESUME_PATH}
@@ -64,68 +105,11 @@ export function ResumeViewer() {
             variant="secondary"
             className="text-xs"
           >
-            Open in new tab ↗
+            Open in new tab
+            <LinkArrow />
           </Pill>
         </div>
       </div>
-
-      <div
-        className="relative mt-8 overflow-hidden rounded-2xl border border-white/10 bg-ink"
-        style={{ height: "clamp(480px, 76vh, 1100px)" }}
-      >
-        {status === "error" ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 text-center">
-            <p className="text-sm leading-relaxed text-white/70">
-              Can&apos;t preview this file? Download it instead.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Pill href={RESUME_PATH} external download variant="primary" className="text-xs">
-                Download resume
-              </Pill>
-              <Pill
-                href={RESUME_PATH}
-                external
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="secondary"
-                className="border-white/30 text-xs text-white hover:border-white/60"
-              >
-                Open in new tab ↗
-              </Pill>
-            </div>
-          </div>
-        ) : (
-          <>
-            {status === "loading" && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                <p className="font-mono text-xs uppercase tracking-widest text-white/50">
-                  Loading resume…
-                </p>
-              </div>
-            )}
-
-            <iframe
-              src={RESUME_PATH}
-              title="Pratham Dangol — Resume"
-              className="h-full w-full"
-              onLoad={() => setStatus("ready")}
-              onError={() => setStatus("error")}
-            />
-          </>
-        )}
-      </div>
-
-      <p className="mt-4 font-mono text-xs text-muted">
-        Trouble viewing?{" "}
-        <a
-          href={RESUME_PATH}
-          download
-          className="underline underline-offset-4 transition-colors hover:text-foreground"
-        >
-          Download the PDF
-        </a>
-        .
-      </p>
     </div>
   );
 }

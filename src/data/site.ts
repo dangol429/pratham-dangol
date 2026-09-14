@@ -21,7 +21,10 @@ export interface SocialLink {
 
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/dangol429" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/pratham-dangol-62b911223/" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/pratham-dangol-62b911223/",
+  },
   // NOTE(Pratham): LeetCode is parked in the footer/contact social row for
   // now since there's no "Study track" section. Move it into the Stack
   // section if you'd rather it sit with the tooling.

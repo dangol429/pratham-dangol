@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CONTACT_EMAIL, NAV_LINKS, SOCIAL_LINKS } from "@/data/site";
 import { EyebrowLabel } from "./EyebrowLabel";
+import { LinkArrow } from "./LinkArrow";
 import { Logo } from "./Logo";
 import { Reveal } from "./Reveal";
 
@@ -35,9 +36,10 @@ export function Footer() {
             <EyebrowLabel>Contact</EyebrowLabel>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-4 block text-sm text-muted transition-colors hover:text-foreground"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-foreground"
             >
               {CONTACT_EMAIL}
+              <LinkArrow />
             </a>
             <div className="mt-4 flex flex-wrap items-center gap-4">
               {SOCIAL_LINKS.map((social) => (
@@ -46,9 +48,10 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-muted transition-colors hover:text-foreground"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-foreground"
                 >
                   {social.label}
+                  <LinkArrow />
                 </a>
               ))}
             </div>
