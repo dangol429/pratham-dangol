@@ -17,7 +17,10 @@ export interface CaseStudy {
   keyDecision: string;
   tags: string[];
   role: string;
+  /** Live site. Rendered as the primary "Case study →" link. */
   href?: string;
+  /** Public source repo, rendered as a smaller secondary link. */
+  repoHref?: string;
   stepper: {
     label: string;
     rows: SteppedListRow[];
@@ -40,7 +43,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     // TODO(Pratham): confirm real backend/DB stack so these tags aren't guessed.
     tags: ["React", "TypeScript"],
     role: "Sole Developer & Designer",
-    href: "https://sathi-puce.vercel.app",
+    href: "https://sathi-puce.vercel.app/",
     // Rows derived from the whatIBuilt copy above (profile verification,
     // niche feed, Dhog, Kura) — not new claims, just restructured.
     stepper: {
@@ -69,6 +72,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     tags: ["Stack TBD"],
     role: "Sole Developer",
     href: "https://fretworkforguitar.com",
+    repoHref: "https://github.com/dangol429/Fretwork",
     // Rows derived from the previous terminal mockup's content (chord
     // search, diagram rendering, variations, caching).
     stepper: {

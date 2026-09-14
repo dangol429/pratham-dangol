@@ -18,7 +18,7 @@ export function Nav() {
             <Logo />
           </div>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-5 md:flex lg:gap-8">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -32,7 +32,7 @@ export function Nav() {
 
           <div className="flex flex-1 items-center justify-end gap-3">
             <div className="hidden md:block">
-              <Pill href="#contact" variant="primary" className="text-xs">
+              <Pill href="/#contact" variant="primary" className="text-xs">
                 Hire me <span aria-hidden="true">↗</span>
               </Pill>
             </div>
@@ -89,7 +89,7 @@ export function Nav() {
               ))}
               <li>
                 <Pill
-                  href="#contact"
+                  href="/#contact"
                   variant="primary"
                   className="text-xs"
                   onClick={() => setOpen(false)}

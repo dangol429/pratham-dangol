@@ -6,8 +6,6 @@ import { Reveal } from "./Reveal";
 import { SectionWrapper } from "./SectionWrapper";
 
 export function ClosingCTA() {
-  const linkedInHref = SOCIAL_LINKS.find((link) => link.label === "LinkedIn")?.href;
-
   return (
     <SectionWrapper id="contact">
       <Reveal className="rounded-3xl border border-foreground/10 bg-surface px-6 py-16 text-center sm:px-12 sm:py-20">
@@ -30,20 +28,18 @@ export function ClosingCTA() {
             <Pill href={`mailto:${CONTACT_EMAIL}`} variant="primary">
               Get in touch
             </Pill>
-            {linkedInHref ? (
-              <Pill href={linkedInHref} variant="secondary" target="_blank" rel="noopener noreferrer">
-                LinkedIn
-              </Pill>
-            ) : (
+            {SOCIAL_LINKS.map((social) => (
               <Pill
+                key={social.label}
+                href={social.href}
+                external
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="secondary"
-                className="cursor-default opacity-60"
-                disabled
-                title="LinkedIn URL not set yet"
               >
-                LinkedIn
+                {social.label}
               </Pill>
-            )}
+            ))}
           </div>
 
           <p className="mt-6 font-mono text-xs uppercase tracking-widest text-muted">

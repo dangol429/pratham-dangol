@@ -39,28 +39,18 @@ export function Footer() {
             >
               {CONTACT_EMAIL}
             </a>
-            <div className="mt-4 flex items-center gap-4">
-              {SOCIAL_LINKS.map((social) =>
-                social.href ? (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted transition-colors hover:text-foreground"
-                  >
-                    {social.label}
-                  </a>
-                ) : (
-                  <span
-                    key={social.label}
-                    className="text-sm text-muted/40"
-                    title="Link coming soon"
-                  >
-                    {social.label}
-                  </span>
-                ),
-              )}
+            <div className="mt-4 flex flex-wrap items-center gap-4">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted transition-colors hover:text-foreground"
+                >
+                  {social.label}
+                </a>
+              ))}
             </div>
           </div>
         </Reveal>

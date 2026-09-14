@@ -1,11 +1,16 @@
+import { ALGOBULLS_LINKEDIN } from "@/data/site";
 import { EyebrowLabel } from "./EyebrowLabel";
 import { GhostHeading } from "./GhostHeading";
+import { PhotoFrame } from "./PhotoFrame";
 import { Reveal } from "./Reveal";
 import { SectionWrapper } from "./SectionWrapper";
 
 interface TimelineItem {
   role: string;
   company: string;
+  /** Links the company name only — the location stays plain text. */
+  companyHref?: string;
+  location?: string;
   dates: string;
   description?: string;
 }
@@ -13,19 +18,24 @@ interface TimelineItem {
 const TIMELINE: TimelineItem[] = [
   {
     role: "Frontend Developer",
-    company: "AlgoBulls · Remote, US",
+    company: "AlgoBulls",
+    companyHref: ALGOBULLS_LINKEDIN,
+    location: "Remote, US",
     dates: "Jan 2025 — Present",
     description:
       "Work on Strategy Builder, RunScreen, Phoenix, and an internal SEO audit agent for an AI algorithmic trading platform.",
   },
   {
     role: "Intern → Frontend Developer",
-    company: "AlgoBulls · Remote, US",
+    company: "AlgoBulls",
+    companyHref: ALGOBULLS_LINKEDIN,
+    location: "Remote, US",
     dates: "Jan 2024 — Jan 2025",
   },
   {
     role: "Full-Stack Developer",
-    company: "OntTech Solutions · Remote, Australia",
+    company: "OntTech Solutions",
+    location: "Remote, Australia",
     dates: "Aug 2023 — Dec 2024",
     description: "Freelance full-stack work on an elderly-care platform.",
   },
@@ -44,7 +54,16 @@ export function About() {
 
       <Reveal className="mt-6 grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
-          <div className="space-y-6">
+          {/* Same portrait as the hero, same grayscale→colour hover. The hero
+              copy is decorative (empty alt); this one carries the real alt so
+              screen readers announce it once, not twice. */}
+          <PhotoFrame
+            imageSrc="/img/profile.png"
+            imageAlt="Pratham Dangol"
+            className="max-w-xs sm:max-w-sm lg:max-w-none"
+          />
+
+          <div className="mt-8 space-y-6">
             <div>
               <EyebrowLabel>Education</EyebrowLabel>
               <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -113,7 +132,21 @@ export function About() {
                     </div>
                     <span className="font-mono text-xs text-muted">{item.dates}</span>
                   </div>
-                  <p className="mt-1 pl-4 font-mono text-xs text-muted">{item.company}</p>
+                  <p className="mt-1 pl-4 font-mono text-xs text-muted">
+                    {item.companyHref ? (
+                      <a
+                        href={item.companyHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                      >
+                        {item.company}
+                      </a>
+                    ) : (
+                      item.company
+                    )}
+                    {item.location ? ` · ${item.location}` : ""}
+                  </p>
                   {item.description && (
                     <p className="mt-3 pl-4 text-sm leading-relaxed text-muted">
                       {item.description}

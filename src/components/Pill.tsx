@@ -19,7 +19,13 @@ interface PillOwnProps {
 }
 
 type PillAsLink = PillOwnProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
+  AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string;
+    /** Render a plain <a> instead of next/link — for external URLs and
+     * static files like /resume.pdf, which shouldn't be client-routed
+     * or prefetched. */
+    external?: boolean;
+  };
 
 type PillAsButton = PillOwnProps &
   ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined };
@@ -30,7 +36,16 @@ export function Pill({ variant = "primary", children, className = "", ...props }
   const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
 
   if (props.href) {
-    const { href, ...anchorProps } = props as PillAsLink;
+    const { href, external, ...anchorProps } = props as PillAsLink;
+
+    if (external) {
+      return (
+        <a href={href} className={classes} {...anchorProps}>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={classes} {...anchorProps}>
         {children}

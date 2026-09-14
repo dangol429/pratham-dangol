@@ -65,15 +65,36 @@ export function CaseStudyRow({ study, reverse = false }: CaseStudyRowProps) {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-            {study.inProgress ? (
-              <Pill variant="secondary" className="cursor-default opacity-60" disabled>
-                In progress
-              </Pill>
-            ) : (
-              <Pill href={study.href ?? "#"} variant="secondary">
-                Case study →
-              </Pill>
-            )}
+            <div className="flex flex-wrap items-center gap-4">
+              {study.inProgress ? (
+                <Pill variant="secondary" className="cursor-default opacity-60" disabled>
+                  In progress
+                </Pill>
+              ) : (
+                study.href && (
+                  <Pill
+                    href={study.href}
+                    external
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                  >
+                    Case study →
+                  </Pill>
+                )
+              )}
+
+              {study.repoHref && (
+                <a
+                  href={study.repoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs uppercase tracking-widest text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                >
+                  Repo ↗
+                </a>
+              )}
+            </div>
             <span className="font-mono text-xs uppercase tracking-widest text-muted">
               {study.inProgress ? "Status: In progress" : `Role: ${study.role}`}
             </span>
